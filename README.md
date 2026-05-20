@@ -6,8 +6,8 @@ The goal of this repo is to keep my academic progress organized and to showcase 
 
 ## 📂 Repository Structure
 
-- **`Procedural-Programming/`**: Fundamentals of C, memory management, and data structures.
 - **`Object-Oriented-Programming/`**: Java, C++ projects focusing on OOP principles, inheritance, and polymorphism.
+- **`Procedural-Programming/`**: Fundamentals of C, memory management, and data structures.
 - **`Operating-Systems/`**: Low-level programming and C exercises.
 - **`Web-Development/`**: Early explorations with HTML5, CSS3, and JavaScript.
 
