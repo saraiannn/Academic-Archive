@@ -5,6 +5,7 @@ import it.fiv.FIVeCafe.entity.BeverageType;
 import it.fiv.FIVeCafe.entity.Extra;
 import it.fiv.FIVeCafe.entity.Order;
 import it.fiv.FIVeCafe.entity.OrderStatus;
+import it.fiv.FIVeCafe.observer.OrderObserver;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -16,7 +17,28 @@ public class OrderController {
 
     //orders that have been paid and sent to the bar
     private final List<Order> submittedOrders = new ArrayList<>();
+    private final List<OrderObserver> observers = new ArrayList<>();
     private int nextOrderNumber = 1;
+
+    //observer subscription
+    public void addObserver(OrderObserver observer) {
+        Objects.requireNonNull(observer, "Observer cannot be null");
+        if(!observers.contains(observer)) {
+            observers.add(observer);
+        }
+    }
+
+    //unsubscribe observer
+    public void removeObserver(OrderObserver observer) {
+        observers.remove(observer);
+    }
+
+    //observer's pattern method that tells every subscriber that the order has changed
+    private void notifyObservers(Order order) {
+        for(OrderObserver observer : new ArrayList<>(observers)) {
+            observer.update(order);
+        }
+    }
 
     //a new order, still in the customer's chart (the bar doesn't know anything about it)
     public Order startNewOrder() {
@@ -36,6 +58,7 @@ public class OrderController {
             return false;
         }
         submittedOrders.add(order);
+        notifyObservers(order);
         return true;
     }
 
@@ -45,7 +68,11 @@ public class OrderController {
         if(!submittedOrders.contains(order)) {  //checks on unsubmitted orders
             return false;
         }
-        return order.transitionTo(next);
+        if(!order.transitionTo(next)) {  //checks if the status has been changed correctly
+            return false;
+        }
+        notifyObservers(order);
+        return true;
     }
 
     public List<Order> getSubmittedOrders() {
