@@ -70,14 +70,17 @@ public class CustomerBoundary extends Application {
     // 1. creating home screen
     private Scene createHomeScene() {
         Label title = new Label("FIVe Cafè's Totem");
-        title.setStyle("-fx-font-size: 24; -fx-font-weight: bold;");
+        title.getStyleClass().add("title-large");
 
         Button startBtn = new Button("Start Order");
+        startBtn.getStyleClass().add("primary-btn");
         startBtn.setOnAction(e -> startOrder());
 
         VBox layout = new VBox(20, title, startBtn);
         layout.setAlignment(Pos.CENTER);
-        return new Scene(layout, 600, 400);
+        Scene scene = new Scene(layout, 600, 400);
+        Styles.apply(scene);
+        return scene;
     }
 
     private void startOrder() {
@@ -98,7 +101,9 @@ public class CustomerBoundary extends Application {
         showBeverageDetails(null);
         refreshCart();
 
-        return new Scene(root, 1050, 600);
+        Scene scene = new Scene(root, 1050, 600);
+        Styles.apply(scene);
+        return scene;
     }
 
     // creating a button for each menu category
@@ -139,10 +144,11 @@ public class CustomerBoundary extends Application {
         VBox.setVgrow(beverageList, Priority.ALWAYS);
 
         nameLabel = new Label();
-        nameLabel.setStyle("-fx-font-size: 18; -fx-font-weight: bold;");
+        nameLabel.getStyleClass().add("title");
         descriptionLabel = new Label();
         descriptionLabel.setWrapText(true);
         priceLabel = new Label();
+        priceLabel.getStyleClass().add("price-label");
 
         extrasBox = new VBox(6, new Label("Extras"));
         extraChecks.clear();
@@ -161,7 +167,7 @@ public class CustomerBoundary extends Application {
 
         VBox details = new VBox(10, nameLabel, descriptionLabel, extrasBox, priceLabel, addBtn);
         details.setPadding(new Insets(15));
-        details.setStyle("-fx-border-color: #cccccc; -fx-border-width: 1;");
+        details.getStyleClass().add("card");
 
         VBox pane = new VBox(10, beverageList, details);
         pane.setPadding(new Insets(15));
@@ -171,7 +177,7 @@ public class CustomerBoundary extends Application {
     // creating cart, total amount of an order, pay and cancel buttons
     private VBox createCartPane() {
         Label title = new Label("Your order");
-        title.setStyle("-fx-font-size: 18; -fx-font-weight: bold;");
+        title.getStyleClass().add("title");
 
         // linking beverage list to items inside the cart
         ListView<Beverage> cartView = new ListView<>(cartItems);
@@ -189,7 +195,7 @@ public class CustomerBoundary extends Application {
         VBox.setVgrow(cartView, Priority.ALWAYS);
 
         totalLabel = new Label();
-        totalLabel.setStyle("-fx-font-size: 16; -fx-font-weight: bold;");
+        totalLabel.getStyleClass().add("subtitle");
 
         payBtn = new Button("Pay");
         payBtn.getStyleClass().add("primary-btn");
@@ -202,6 +208,7 @@ public class CustomerBoundary extends Application {
         VBox pane = new VBox(10, title, cartView, totalLabel, new HBox(10, payBtn, cancelBtn));
         pane.setPadding(new Insets(15));
         pane.setPrefWidth(300);
+        pane.getStyleClass().add("cart-pane");
         return pane;
     }
 
@@ -282,6 +289,7 @@ public class CustomerBoundary extends Application {
         dialog.setTitle("Payment");
         dialog.setHeaderText(String.format("Total: %.2f €", currentOrder.getTotalPrice()));
         dialog.setContentText("Select payment method:");
+        Styles.apply(dialog);
         Optional<String> method = dialog.showAndWait();
 
         if (method.isEmpty()) {
@@ -333,6 +341,7 @@ public class CustomerBoundary extends Application {
     private Alert createAlert(Alert.AlertType type, String text) {
         Alert alert = new Alert(type, text);
         alert.setHeaderText(null);
+        Styles.apply(alert);
         return alert;
     }
 }

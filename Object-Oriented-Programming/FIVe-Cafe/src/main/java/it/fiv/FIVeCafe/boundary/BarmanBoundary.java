@@ -66,17 +66,21 @@ public class BarmanBoundary implements OrderObserver {
 
         // details of the selected order (right)
         detailTitle = new Label();
-        detailTitle.setStyle("-fx-font-size: 18; -fx-font-weight: bold;");
+        detailTitle.getStyleClass().add("title");
         detailBody = new Label();
         detailBody.setWrapText(true);
         VBox details = new VBox(10, detailTitle, detailBody);
         details.setPadding(new Insets(15));
         details.setPrefWidth(280);
+        details.getStyleClass().add("card");
 
         // status buttons (bottom)
         preparingBtn = createStatusButton(OrderStatus.PREPARING);
         readyBtn = createStatusButton(OrderStatus.READY);
         deliveredBtn = createStatusButton(OrderStatus.DELIVERED);
+        preparingBtn.getStyleClass().add("primary-btn");
+        readyBtn.getStyleClass().add("primary-btn");
+        deliveredBtn.getStyleClass().add("secondary-btn");
         HBox actions = new HBox(10, preparingBtn, readyBtn, deliveredBtn);
         actions.setPadding(new Insets(12));
 
@@ -84,6 +88,8 @@ public class BarmanBoundary implements OrderObserver {
         root.setCenter(ordersView);
         root.setRight(details);
         root.setBottom(actions);
+        BorderPane.setMargin(ordersView, new Insets(12, 6, 0, 12));
+        BorderPane.setMargin(details, new Insets(12, 12, 0, 6));
 
         // copies inside orderItems all orders already sent before this window opened, then subscribe to the new ones
         orderItems.setAll(orderController.getSubmittedOrders());
@@ -91,7 +97,9 @@ public class BarmanBoundary implements OrderObserver {
 
         refreshSelection();
 
-        stage.setScene(new Scene(root, 700, 450));
+        Scene scene = new Scene(root, 700, 450);
+        Styles.apply(scene);
+        stage.setScene(scene);
         stage.show();
     }
 
@@ -113,6 +121,7 @@ public class BarmanBoundary implements OrderObserver {
         if (!changed) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Invalid status change: " + selected.getStatus() + " → " + next);
             alert.setHeaderText(null);
+            Styles.apply(alert);
             alert.showAndWait();
         }
         // no refresh here: on success the controller notifies update(), see below
