@@ -5,13 +5,9 @@ import java.util.List;
 import java.util.Collections;
 
 public class Order {
-    private final int orderNumber;
+    private int orderNumber;
     private final List<Beverage> beverages = new ArrayList<>();  //list cannot be substituted but elements can be added to it
     private OrderStatus status = OrderStatus.CREATED;
-
-    public Order(int orderNumber) {
-        this.orderNumber = orderNumber;
-    }
 
     public int getOrderNumber() {
         return orderNumber;
@@ -64,5 +60,15 @@ public class Order {
         }
         status = next;
         return true;
+    }
+
+    public void assignNumber(int number) {
+        if (number <= 0) {
+            throw new IllegalArgumentException("Order number must be positive");
+        }
+        if (orderNumber != 0) {
+            throw new IllegalStateException("Order already has number #" + orderNumber);
+        }
+        orderNumber = number;
     }
 }

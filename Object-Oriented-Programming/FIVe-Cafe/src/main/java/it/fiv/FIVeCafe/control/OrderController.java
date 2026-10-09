@@ -42,7 +42,7 @@ public class OrderController {
 
     //a new order, still in the customer's chart (the bar doesn't know anything about it)
     public Order startNewOrder() {
-        return new Order(nextOrderNumber++);
+        return new Order();
     }
 
     public void addBeverageToOrder(Order order, BeverageType type, Set<Extra> extras) {
@@ -54,9 +54,11 @@ public class OrderController {
     //the order is sent to the bar. It is the ONLY way an order gets into the list
     public boolean submitOrder(Order order) {
         Objects.requireNonNull(order, "Order cannot be null");
-        if(!order.transitionTo(OrderStatus.RECEIVED)) {  //checks whether the order's state is CREATED or not
+        if(!order.canTransitionTo(OrderStatus.RECEIVED)) {  //checks whether the order's state is CREATED or not
             return false;
         }
+        order.assignNumber(nextOrderNumber++);
+        order.transitionTo(OrderStatus.RECEIVED);
         submittedOrders.add(order);
         notifyObservers(order);
         return true;
