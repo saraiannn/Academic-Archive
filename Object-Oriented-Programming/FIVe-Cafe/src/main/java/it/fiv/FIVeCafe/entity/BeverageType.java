@@ -130,16 +130,6 @@ public enum BeverageType {  //all values are created when the program gets execu
         return description;
     }
 
-    //finds a beverage from the text shown on screen
-    public static BeverageType fromDisplayName(String name) {
-        for(BeverageType type : values()) {  //enum method that returns all values in the same order they were inserted
-            if(type.displayName.equalsIgnoreCase(name)) {
-                return type;
-            }
-        }
-        throw new IllegalArgumentException("Unknown beverage type: " + name);
-    }
-
     //all the beverages of one category, in menu order
     public static List<BeverageType> byCategory(BeverageCategory category) {
         List<BeverageType> result = new ArrayList<>();
