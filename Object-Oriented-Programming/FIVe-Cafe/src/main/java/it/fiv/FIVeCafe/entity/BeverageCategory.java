@@ -10,12 +10,11 @@ public enum BeverageCategory {
 
     private final String categoryName;
 
-    private BeverageCategory(String categoryName) {
+    BeverageCategory(String categoryName) {
         this.categoryName = categoryName;
     }
 
     public String getCategoryName() {
         return categoryName;
     }
-
 }

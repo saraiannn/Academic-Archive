@@ -117,7 +117,7 @@ public enum BeverageType {
         return category;
     }
 
-    public double getPrice() {
+    public double getBeveragePrice() {
         return price;
     }
 
@@ -130,19 +130,19 @@ public enum BeverageType {
     }
 
     // adding all the beverages of the category that is passed as method parameter to a list
-    public static List<BeverageType> getBeveragesByCategory(BeverageCategory category) {
-        List<BeverageType> menuOrder = new ArrayList<>();
+    public static List<BeverageType> getBeveragesByCategory(BeverageCategory type) {
+        List<BeverageType> beverages = new ArrayList<>();
         for (BeverageType beverage : values()) {
-            if(beverage.category == category) {
-                menuOrder.add(beverage);
+            if(beverage.category == type) {
+                beverages.add(beverage);
             }
         }
-        return menuOrder;
+        return beverages;
     }
 
-     @Override
-     public String toString() {
-        return beverageName + " - " + String.format("%.2f", price) + "€";
-     }
+    @Override
+    public String toString() {
+        return getBeverageName() + " - " + String.format("%.2f", getBeveragePrice()) + "€";
+    }
 
 }
