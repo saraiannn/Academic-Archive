@@ -4,14 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Order {
-    // constructor with orderId ✅
-    // list of beverages ✅
-    // method to add a beverage to a list ✅
-    // getTotalPrice() method ✅
-    // getter for orderId, list and status ✅
-    // using moveToNextStatus() method to go through its state ✅
-    // controlling whether its status is DELIVERED or not
-
     private final int orderId;
     private List<Beverage> beverageList;
     private OrderStatus status;
