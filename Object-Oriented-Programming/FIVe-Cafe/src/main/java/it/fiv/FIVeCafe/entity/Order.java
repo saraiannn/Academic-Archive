@@ -12,7 +12,6 @@ public class Order {
         this.orderId = orderId;
         this.beverageList = new ArrayList<>();
         this.status = OrderStatus.CREATED;
-
     }
 
     public int getOrderId() {
