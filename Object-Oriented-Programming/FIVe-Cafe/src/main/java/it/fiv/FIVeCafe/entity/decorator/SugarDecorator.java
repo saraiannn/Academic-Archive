@@ -9,7 +9,7 @@ public class SugarDecorator extends BeverageDecorator {
 
     @Override
     public String getBeverageName() {
-        return wrappedBeverage.getBeverageName() + " + sugar";
+        return wrappedBeverage.getBeverageName() + " + Sugar";
     }
 
     @Override

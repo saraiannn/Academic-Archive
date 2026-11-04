@@ -29,10 +29,10 @@ public class Order {
     // safety controls: if passed beverage is null or order is already been delivered, a new beverage cannot be added
     public void addBeverage(Beverage beverageToAdd) {
        if (beverageToAdd == null) {
-           throw new IllegalArgumentException("beverage is null");
+           throw new IllegalArgumentException("Beverage is null");
        }
        if (status != OrderStatus.CREATED) {
-           throw new IllegalStateException("cannot add beverage: order is not in CREATED state");
+           throw new IllegalStateException("Cannot add beverage: order is not in CREATED state");
        }
        beverageList.add(beverageToAdd);
     }

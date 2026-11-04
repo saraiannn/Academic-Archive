@@ -9,7 +9,7 @@ public class CocoaDecorator extends BeverageDecorator {
 
     @Override
     public String getBeverageName() {
-        return wrappedBeverage.getBeverageName() + " + cocoa";
+        return wrappedBeverage.getBeverageName() + " + Cocoa";
     }
 
     @Override

@@ -18,7 +18,7 @@ public enum OrderStatus {
             case READY:
                 return OrderStatus.DELIVERED;
             default:
-                throw new IllegalStateException("no status after DELIVERED");
+                throw new IllegalStateException("No status after DELIVERED");
         }
     }
 }

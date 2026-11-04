@@ -19,15 +19,15 @@ public class BeverageFactory {
 
         // 1. a beverage cannot be created without knowing its type
         if(type == null) {
-            throw new IllegalArgumentException("beverage type is null");
+            throw new IllegalArgumentException("Beverage type is null");
         }
         // 2. extras must always be provided: pass an empty set for a plain beverage
         if (extras == null) {
-            throw new IllegalArgumentException("extras are null");
+            throw new IllegalArgumentException("Extras are null");
         }
         // 3. beverages like water and juices do not accept extras
         if (!extras.isEmpty() && !type.allowsExtras()) {
-            throw new IllegalArgumentException("extras not allowed for type: " + type);
+            throw new IllegalArgumentException("Extras not allowed for type: " + type);
         }
 
         Beverage beverage = new BasicBeverage(type);
@@ -49,7 +49,7 @@ public class BeverageFactory {
             case COCOA:
                 return new CocoaDecorator(beverage);
             default:
-                throw new IllegalArgumentException("unknown extra: " + extra);
+                throw new IllegalArgumentException("Unknown extra: " + extra);
         }
     }
 }
