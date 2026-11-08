@@ -7,7 +7,13 @@ import java.util.ArrayList;
 import java.util.Set;
 
 public class OrderController {
-    public OrderController() {}
+    private static final OrderController instance = new OrderController();
+
+    private OrderController() {}
+
+    public static OrderController getInstance() {
+        return instance;
+    }
 
     public List<Order> orders = new ArrayList<>();
     private int orderNumberCounter = 1;
